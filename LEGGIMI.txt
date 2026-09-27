@@ -1,0 +1,57 @@
+EASYBILANCE – come pubblicarla con GitHub Pages e installarla sul telefono
+===========================================================================
+
+Contenuto della cartella (caricala così com'è, senza rinominare nulla):
+  index.html            l'app
+  manifest.webmanifest  nome, icona e colori per l'installazione
+  sw.js                 fa funzionare l'app anche senza internet
+  icons/                le icone dell'app
+  LEGGIMI.txt           queste istruzioni (puoi caricarlo o no, è indifferente)
+
+I tuoi dati NON sono in questi file: restano solo sul telefono.
+
+1) CREA L'ACCOUNT (una volta sola)
+   - Vai su https://github.com e registrati gratis (va bene l'email personale).
+
+2) CREA IL "REPOSITORY" (la cartella online dell'app)
+   - In alto a destra: "+"  ->  "New repository".
+   - Repository name: easybilance
+   - Lascia "Public" (con l'account gratuito le pagine funzionano solo così).
+   - Clicca "Create repository".
+
+3) CARICA I FILE
+   - Nella pagina del repository appena creato clicca il link
+     "uploading an existing file" (oppure "Add file" -> "Upload files").
+   - Trascina nella pagina TUTTO il contenuto di questa cartella
+     (index.html, manifest.webmanifest, sw.js e la cartella icons).
+     Controlla che nell'elenco compaiano anche i file dentro icons/.
+   - In fondo clicca "Commit changes".
+
+4) ACCENDI GITHUB PAGES
+   - Nel repository: "Settings" -> nel menu a sinistra "Pages".
+   - Alla voce "Build and deployment":
+       Source: "Deploy from a branch"
+       Branch: "main"  e cartella "/ (root)"  ->  "Save".
+   - Dopo 1-2 minuti, in cima alla stessa pagina compare l'indirizzo:
+       https://TUONOMEUTENTE.github.io/easybilance/
+
+5) INSTALLALA SUL TELEFONO (Android)
+   - Apri l'indirizzo con Chrome.
+   - Menu (tre puntini in alto a destra) -> "Installa app"
+     (su alcuni telefoni: "Aggiungi a schermata Home" -> "Installa").
+   - Apri EasyBilance dall'icona, tocca "Importa un backup" e scegli
+     il file backup (es. backup-bilancio-2026-da-settembre.json).
+
+AGGIORNARE L'APP IN FUTURO
+   - Ripeti il punto 3 con i nuovi file: quelli con lo stesso nome vengono sostituiti.
+   - Sul telefono la nuova versione arriva la prima volta che apri l'app con
+     internet; se non la vedi, chiudila e riaprila.
+   - I dati sul telefono non vengono toccati.
+
+IMPORTANTE SUI DATI
+   - Stanno solo nel telefono (nella memoria di Chrome). Se cancelli i dati di
+     Chrome, disinstalli l'app o cambi telefono, si perdono.
+   - Esporta spesso il backup (scheda Budget -> Esporta backup completo) e
+     conservane una copia su Google Drive o sul computer.
+
+Nota: i nomi dei menu di GitHub e Chrome possono cambiare leggermente nel tempo.
