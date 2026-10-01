@@ -182,7 +182,7 @@ tfoot td{font-weight:700;border-top:2px solid var(--line)}
 .toast{position:fixed;left:50%;bottom:calc(150px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:600;font-size:14px;z-index:30;box-shadow:var(--shadow);max-width:calc(100% - 32px)}
 .toast.undo{display:flex;align-items:center;gap:14px;padding:10px 10px 10px 16px;overflow:hidden;position:fixed}
 .toast.undo button{border:0;background:var(--bg);color:var(--ink);font-weight:700;border-radius:9px;padding:8px 14px}
-.toast.undo i{position:absolute;left:0;bottom:0;height:3px;width:100%;background:var(--accent);transform-origin:left;animation:shrink 10s linear forwards}
+.toast.undo i{position:absolute;left:0;bottom:0;height:3px;width:100%;background:var(--accent);transform-origin:left;animation:shrink 5s linear forwards}
 @keyframes shrink{to{transform:scaleX(0)}}
 @media (prefers-reduced-motion:reduce){.toast.undo i{animation:none}}
 .vh{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}
@@ -233,6 +233,8 @@ textarea.inp{resize:vertical;font-size:13px;font-family:ui-monospace,Menlo,Conso
 (function(){
 "use strict";
 const DEFAULT_CFG={"categorie": [{"id": "casa", "nome": "Casa", "tipo": "N", "desc": "affitto, mutuo, manutenzione"}, {"id": "trasporti", "nome": "Trasporti", "tipo": "N", "desc": "treno, bus, autostrada, parcheggi"}, {"id": "auto", "nome": "Auto", "tipo": "N", "desc": "rata, assicurazione, bollo, tagliando, revisione, gomme"}, {"id": "benzina", "nome": "Benzina", "tipo": "N", "desc": "benzina"}, {"id": "bollette", "nome": "Bollette", "tipo": "N", "desc": "acqua, energia, gas, internet, telefono"}, {"id": "spesa-condivisa", "nome": "Spesa condivisa", "tipo": "N", "desc": "spesa al supermercato condivisa"}, {"id": "spesa", "nome": "Spesa", "tipo": "N", "desc": "spesa al supermercato"}, {"id": "investimenti", "nome": "Investimenti", "tipo": "N", "desc": "piani di accumulo, accantonamenti"}, {"id": "spese-mediche", "nome": "Spese mediche", "tipo": "N", "desc": "visite mediche"}, {"id": "vestiti", "nome": "Vestiti", "tipo": "N", "desc": "vestiti"}, {"id": "cose-casa", "nome": "Cose casa", "tipo": "N", "desc": "mobili, elettronica, accessori casa, cucina"}, {"id": "cultura", "nome": "Cultura", "tipo": "N", "desc": "libri, musei, corsi"}, {"id": "assicurazione", "nome": "Assicurazione", "tipo": "N", "desc": "polizze e assicurazioni"}, {"id": "altro-necessita", "nome": "Altro necessità", "tipo": "N", "desc": "altro"}, {"id": "ristorante", "nome": "Ristorante", "tipo": "E", "desc": "ristorante, aperitivo, bar, pub"}, {"id": "palestra", "nome": "Palestra", "tipo": "E", "desc": "abbonamento, attrezzatura"}, {"id": "padel", "nome": "Padel", "tipo": "E", "desc": "partite, racchetta, palline, corso"}, {"id": "sport", "nome": "Sport", "tipo": "E", "desc": "costi legati alle altre attività sportive"}, {"id": "giochi", "nome": "Giochi", "tipo": "E", "desc": "boardgames, videogames"}, {"id": "svago", "nome": "Svago", "tipo": "E", "desc": "concerti, cinema, stadio, attività ludiche in generale"}, {"id": "vacanza", "nome": "Vacanza", "tipo": "E", "desc": "hotel, campeggio, b&b, aereo, treno, bus"}, {"id": "regali", "nome": "Regali", "tipo": "E", "desc": "regali"}, {"id": "intrattenimento", "nome": "Intrattenimento", "tipo": "E", "desc": "abbonamenti streaming"}, {"id": "altro-extra", "nome": "Altro extra", "tipo": "E", "desc": "altro"}], "budget": {"entrate": [], "extraPct": 0, "fisse": []}};
+const APP_VERSIONE="1.1";
+const APP_NOVITA=["Promemoria per aggiornare i saldi dei conti l'ultimo giorno del mese.","I conferma rapidi (spesa salvata, saldi aggiornati, ecc.) non hanno più il timer di annullamento: resta solo sulle azioni che cancellano qualcosa."];
 const MESI=["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
 const MESI_B=["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"];
 const eur=new Intl.NumberFormat("it-IT",{style:"currency",currency:"EUR"});
@@ -244,6 +246,7 @@ const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,8);
 const pad=n=>String(n).padStart(2,"0");
 const todayISO=()=>{const d=new Date();return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());};
 const ymNow=()=>todayISO().slice(0,7);
+const isUltimoGiorno=()=>{const d=new Date();return d.getDate()===new Date(d.getFullYear(),d.getMonth()+1,0).getDate();};
 const ymLabel=ym=>MESI[+ym.slice(5)-1]+" "+ym.slice(0,4);
 const ymShift=(ym,k)=>{let y=+ym.slice(0,4),m=+ym.slice(5)+k;while(m>12){m-=12;y++}while(m<1){m+=12;y--}return y+"-"+pad(m);};
 const parseAmt=v=>{if(typeof v==="number")return v;v=String(v||"").trim().replace(/\s/g,"").replace(/€/g,"");if(v.includes(","))v=v.replace(/\./g,"").replace(",",".");const n=parseFloat(v);return isFinite(n)?Math.round(n*100)/100:NaN;};
@@ -275,7 +278,7 @@ function budgetSrc(y){y=String(y||curY());const bA=(S.cfg&&S.cfg.budgetAnni)||{}
   const prev=Object.keys(bA).filter(k=>k<y).sort().pop();if(prev)return{b:bA[prev],from:prev};return{b:(S.cfg&&S.cfg.budget)||{entrate:[],extraPct:0,fisse:[]},from:null};}
 const B=y=>budgetSrc(y).b;
 function saveBudget(y,patch,msg){const cf=clone(S.cfg);cf.budgetAnni=cf.budgetAnni||{};const nb=Object.assign(clone(B(y)),patch);cf.budgetAnni[y]=nb;
-  if(!Object.keys(cf.budgetAnni).some(k=>k<y)&&!cf.budget)cf.budget=clone(nb);saveCfg(cf).then(ok=>ok&&undoToast(msg));}
+  if(!Object.keys(cf.budgetAnni).some(k=>k<y)&&!cf.budget)cf.budget=clone(nb);saveCfg(cf).then(ok=>ok&&toast(msg));}
 const redditoAnnuo=y=>sum(B(y).entrate.map(e=>e.importo));
 const extraMese=y=>redditoAnnuo(y)*(+B(y).extraPct||0)/12;
 const mensileOf=e=>{const v=+(e.importo!=null?e.importo:e.mensile)||0;return e.periodo==="A"?v/12:v;};
@@ -328,7 +331,7 @@ let toastT;function toast(msg){const r=$("#toast-root");r.innerHTML='<div class=
 function undoToast(msg){const prev=REC;REC={};if(!Object.keys(prev).length){toast(msg);return;}
   const r=$("#toast-root");clearTimeout(toastT);
   r.innerHTML='<div class="toast undo" role="status"><span>'+esc(msg)+'</span><button type="button" id="undo-btn">Annulla</button><i></i></div>';
-  toastT=setTimeout(()=>{r.innerHTML=""},10000);
+  toastT=setTimeout(()=>{r.innerHTML=""},5000);
   r.querySelector("#undo-btn").onclick=async()=>{clearTimeout(toastT);r.innerHTML="";toast("Annullo…");const ok=await restore(prev);toast(ok?"Operazione annullata":"Non sono riuscito ad annullare tutto, controlla i dati");};}
 const ICONS={
   home:'<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
@@ -368,6 +371,7 @@ function vHome(){
   let h='';
   if(S.dbState==="off")h+='<div class="banner">Il browser non permette di salvare i dati (succede, per esempio, in navigazione in incognito): quello che inserisci non verrà conservato.</div>';
   const bkd=backupAge();if(bkd!=null)h+='<div class="banner row"><span>'+(bkd===Infinity?'Non hai ancora esportato un backup dei tuoi dati.':'L’ultimo backup risale a '+bkd+' giorni fa.')+'</span><button class="link" data-act="backup">Esporta</button></div>';
+  if(S.ym===ymNow()&&isUltimoGiorno()&&(S.conti.conti||[]).length&&!(S.conti.saldi&&S.conti.saldi[S.ym]))h+='<div class="banner row"><span>Oggi è l’ultimo giorno del mese: è un buon momento per aggiornare i saldi dei conti.</span><button class="link" data-act="saldi">Aggiorna</button></div>';
   h+='<section class="card"><div class="label">Uscite di '+MESI[+S.ym.slice(5)-1]+'</div><div class="big num">'+f(t.tot)+'</div>'+
      '<div class="split" aria-hidden="true"><i class="need-c" style="width:'+nW+'%"></i><i class="extra-c" style="width:'+(t.tot?100-nW:0)+'%"></i></div>'+
      '<div class="legend"><span><span class="dot need-c"></span>Necessità <b class="num">'+f(t.need)+'</b></span><span><span class="dot extra-c"></span>Extra <b class="num">'+f(t.extra)+'</b></span></div></section>';
@@ -512,6 +516,16 @@ function openSheet(html,mount){
   const first=sh.querySelector("[autofocus]");if(first)setTimeout(()=>first.focus(),60);
 }
 function closeSheet(){$("#sheet-root").innerHTML="";}
+function checkNovita(){
+  let vista=null;try{vista=localStorage.getItem("easybilance_versione_vista");}catch(e){}
+  if(vista===APP_VERSIONE)return;
+  const primaVolta=!vista&&!S.cfg;
+  try{localStorage.setItem("easybilance_versione_vista",APP_VERSIONE);}catch(e){}
+  if(primaVolta)return;
+  openSheet('<h3>App aggiornata</h3><p class="sub" style="margin:-8px 0 14px">Ecco le novità della versione '+esc(APP_VERSIONE)+':</p>'+
+    '<ul style="margin:0 0 16px;padding-left:20px">'+APP_NOVITA.map(n=>'<li style="margin-bottom:8px">'+esc(n)+'</li>').join("")+'</ul>'+
+    '<div class="actions"><button type="button" class="btn" data-act="close">Ho capito</button></div>');
+}
 
 function catPicker(sel){
   const g=t=>cats().filter(c=>c.tipo===t).map(c=>'<button type="button" class="chip '+t+'" data-cat="'+esc(c.id)+'" aria-pressed="'+(c.id===sel)+'" title="'+esc(c.desc||"")+'">'+esc(c.nome)+'</button>').join("");
@@ -576,7 +590,7 @@ function sheetSpesa(ym,id){
       const m=clone(md(nym));const i=m.spese.findIndex(s=>s.id===rec.id);if(i>=0)m.spese[i]=rec;else m.spese.push(rec);
       let ok=await saveMonth(nym,m);
       if(ricObj){const cf=clone(S.cfg);cf.ricorrenti=(cf.ricorrenti||[]).concat([ricObj]);ok=(await saveCfg(cf))&&ok;}
-      if(ok)undoToast(ex?"Spesa aggiornata":"Spesa aggiunta: "+f(rec.importo)+(ricObj?" · ripetuta ogni mese":""));
+      if(ok)toast(ex?"Spesa aggiornata":"Spesa aggiunta: "+f(rec.importo)+(ricObj?" · ripetuta ogni mese":""));
       if(nym!==S.ym&&!ex){S.ym=nym;render();}
     });
   });
@@ -585,8 +599,8 @@ function sheetSpesa(ym,id){
 /* ---------- ricorrenti ---------- */
 function ricToSpesa(r,ym){const g=Math.min(r.giorno||1,daysIn(ym));const x={id:uid(),data:ym+"-"+pad(g),importo:ricAmt(r),desc:r.desc,cat:r.cat,ts:Date.now(),ric:r.id};if(r.quota){x.totale=r.importo;x.quota=r.quota;}return x;}
 async function ricConfirm(ids){const m=clone(md(S.ym));const rs=ricList().filter(r=>ids.includes(r.id));rs.forEach((r,i)=>{const x=ricToSpesa(r,S.ym);x.ts+=i;m.spese.push(x);});REC={};
-  if(await saveMonth(S.ym,m))undoToast(rs.length>1?rs.length+" spese ricorrenti registrate":"Spesa registrata: "+f(ricAmt(rs[0])));}
-async function ricSkip(id){const m=clone(md(S.ym));m.saltate=(m.saltate||[]).concat([id]);REC={};if(await saveMonth(S.ym,m))undoToast("Saltata per "+MESI[+S.ym.slice(5)-1]);}
+  if(await saveMonth(S.ym,m))toast(rs.length>1?rs.length+" spese ricorrenti registrate":"Spesa registrata: "+f(ricAmt(rs[0])));}
+async function ricSkip(id){const m=clone(md(S.ym));m.saltate=(m.saltate||[]).concat([id]);REC={};if(await saveMonth(S.ym,m))toast("Saltata per "+MESI[+S.ym.slice(5)-1]);}
 function sheetRicList(){
   const L=ricList();
   openSheet('<h3>Spese ricorrenti</h3><p class="sub" style="margin:-8px 0 14px">Ogni mese compaiono nella scheda Mese, pronte da confermare. Per aggiungerne una puoi anche spuntare “Ripeti ogni mese” quando registri una spesa.</p>'+
@@ -616,7 +630,7 @@ function sheetRic(id){
       if(!cat){err.textContent="Scegli una categoria.";return;}
       const cf=clone(S.cfg);cf.ricorrenti=cf.ricorrenti||[];const o={id:r?r.id:uid(),desc:d,importo:a,quota:quota<1?quota:null,cat,giorno:g,dal:r?r.dal:ymNow(),attiva:r?$$("#r-on").checked:true};
       const i=cf.ricorrenti.findIndex(x=>x.id===o.id);if(i>=0)cf.ricorrenti[i]=o;else cf.ricorrenti.push(o);
-      closeSheet();REC={};saveCfg(cf).then(ok=>ok&&undoToast("Ricorrente salvata"));};
+      closeSheet();REC={};saveCfg(cf).then(ok=>ok&&toast("Ricorrente salvata"));};
   });
 }
 
@@ -683,7 +697,7 @@ function sheetCat(id){
       const cf=clone(S.cfg);
       if(c){const x=cf.categorie.find(x=>x.id===id);x.nome=n;x.desc=d;x.tipo=tipo;}
       else{let base=n.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")||"cat";let nid=base,i=2;while(cf.categorie.some(x=>x.id===nid))nid=base+"-"+(i++);cf.categorie.push({id:nid,nome:n,tipo,desc:d});}
-      closeSheet();saveCfg(cf).then(ok=>ok&&undoToast("Categoria salvata"));};
+      closeSheet();saveCfg(cf).then(ok=>ok&&toast("Categoria salvata"));};
   });
 }
 
@@ -705,7 +719,7 @@ function sheetAcc(id){
       const c=clone(S.conti);c.conti=c.conti||[];c.saldi=c.saldi||{};
       if(a){const x=c.conti.find(x=>x.id===id);x.nome=n;x.tipo=sh.querySelector("#a-t").value;x.saldoIniziale=s;}
       else c.conti.push({id:uid(),nome:n,tipo:sh.querySelector("#a-t").value,saldoIniziale:s});
-      closeSheet();saveConti(c).then(ok=>ok&&undoToast("Conto salvato"));};
+      closeSheet();saveConti(c).then(ok=>ok&&toast("Conto salvato"));};
   });
 }
 function sheetSaldi(){
@@ -714,14 +728,14 @@ function sheetSaldi(){
     C.map(a=>'<label class="fld"><span>'+esc(a.nome)+' · ultimo noto '+f(saldoAl(a,ymShift(S.ym,-1)))+'</span><input class="inp num" data-acc="'+esc(a.id)+'" inputmode="decimal" value="'+esc(cur[a.id]!=null?amtStr(cur[a.id]):"")+'" placeholder="0,00"></label>').join("")+
     '<div class="err" id="sd-err"></div><div class="actions"><button type="button" class="btn ghost" data-act="close">Annulla</button><button type="button" class="btn" id="sd-save">Salva</button></div>',
   sh=>{sh.querySelector("#sd-save").onclick=()=>{const o={};for(const i of sh.querySelectorAll("[data-acc]")){if(i.value.trim()==="")continue;const n=parseAmt(i.value);if(!isFinite(n)){sh.querySelector("#sd-err").textContent="Controlla i valori inseriti.";return;}o[i.dataset.acc]=n;}
-    const c=clone(S.conti);c.saldi=c.saldi||{};if(Object.keys(o).length)c.saldi[S.ym]=o;else delete c.saldi[S.ym];closeSheet();saveConti(c).then(ok=>ok&&undoToast("Saldi aggiornati"));};});
+    const c=clone(S.conti);c.saldi=c.saldi||{};if(Object.keys(o).length)c.saldi[S.ym]=o;else delete c.saldi[S.ym];closeSheet();saveConti(c).then(ok=>ok&&toast("Saldi aggiornati"));};});
 }
 function sheetBudgetMese(){
   const m=md(S.ym);const def=extraMese(curY());
   openSheet('<h3>Budget extra di '+esc(MESI[+S.ym.slice(5)-1])+'</h3><p class="sub" style="margin:-8px 0 14px">Di norma è '+f(def)+' (quota extra del reddito ÷ 12). Puoi cambiarlo solo per questo mese.</p>'+
     '<label class="fld"><span>Budget del mese (€)</span><input class="inp num" id="bm" inputmode="decimal" value="'+esc(m.budgetExtra!=null?amtStr(m.budgetExtra):"")+'" placeholder="'+esc(amtStr(Math.round(def*100)/100))+'"></label>'+
     '<div class="err" id="bm-err"></div><div class="actions"><button type="button" class="btn ghost" id="bm-reset">Usa il valore standard</button><button type="button" class="btn" id="bm-save">Salva</button></div>',
-  sh=>{const go=v=>{const x=clone(md(S.ym));x.budgetExtra=v;closeSheet();saveMonth(S.ym,x).then(ok=>ok&&undoToast("Budget del mese aggiornato"));};
+  sh=>{const go=v=>{const x=clone(md(S.ym));x.budgetExtra=v;closeSheet();saveMonth(S.ym,x).then(ok=>ok&&toast("Budget del mese aggiornato"));};
     sh.querySelector("#bm-reset").onclick=()=>go(null);
     sh.querySelector("#bm-save").onclick=()=>{const v=sh.querySelector("#bm").value.trim();if(v===""){go(null);return;}const n=parseAmt(v);if(!isFinite(n)||n<0){sh.querySelector("#bm-err").textContent="Inserisci un importo valido.";return;}go(n);};});
 }
@@ -843,7 +857,7 @@ async function applyImport(bk,mode){
   for(const [ym,m] of Object.entries(mesi))ok=(await saveMonth(ym,m))&&ok;
   if(mode==="replace"){for(const ym of Object.keys(S.months)){if(!mesi[ym])ok=(await delDoc("mesi/"+ym))&&ok;}}
   ok=(await saveConti(conti))&&ok;
-  render();if(ok)undoToast("Backup importato: "+n+" spes"+(n===1?"a":"e"));else{REC={};toast("Importazione incompleta: riprova");}
+  render();if(ok){const msg="Backup importato: "+n+" spes"+(n===1?"a":"e");if(mode==="replace")undoToast(msg);else toast(msg);}else{REC={};toast("Importazione incompleta: riprova");}
 }
 function readBackup(text,errEl){
   try{const bk=cleanBackup(JSON.parse(text));sheetImport(bk);}
@@ -877,7 +891,7 @@ document.addEventListener("click",e=>{
   if(a==="add")return sheetSpesa(S.ym,null);
   if(a==="edit")return sheetSpesa(el.dataset.ym,el.dataset.id);
   if(a==="fcat"){S.fcat=el.dataset.v||null;render();return;}
-  if(a==="entrate"){const m=md(S.ym);return sheetRows("Entrate di "+esc(ymLabel(S.ym)),"Stipendio, rimborsi, buoni pasto e altre entrate del mese.",m.entrate.map(x=>({voce:x.desc,importo:x.importo})),"importo","€",out=>{const x=clone(md(S.ym));x.entrate=out.map(r=>({id:uid(),desc:r.voce,importo:r.n}));saveMonth(S.ym,x).then(ok=>ok&&undoToast("Entrate salvate"));});}
+  if(a==="entrate"){const m=md(S.ym);return sheetRows("Entrate di "+esc(ymLabel(S.ym)),"Stipendio, rimborsi, buoni pasto e altre entrate del mese.",m.entrate.map(x=>({voce:x.desc,importo:x.importo})),"importo","€",out=>{const x=clone(md(S.ym));x.entrate=out.map(r=>({id:uid(),desc:r.voce,importo:r.n}));saveMonth(S.ym,x).then(ok=>ok&&toast("Entrate salvate"));});}
   if(a==="budgetMese")return sheetBudgetMese();
   if(a==="editEntrate"){const y=curY();return sheetRows("Reddito netto "+y,"Le voci che compongono il reddito netto dell’anno.",B(y).entrate,"importo","€/anno",out=>saveBudget(y,{entrate:out.map(r=>({voce:r.voce,importo:r.n}))},"Reddito "+y+" aggiornato"));}
   if(a==="editFisse")return sheetFisse(curY());
@@ -930,7 +944,8 @@ render();
   if(!db){S.dbState="off";S.cfgLoaded=S.monthsLoaded=true;render();return;}
   S.db=db;S.dbState="on";
   try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist();}catch(e){}
-  db.doc("config/main").onSnapshot(s=>{S.cfg=s.exists?s.data():null;S.cfgLoaded=true;render();});
+  let novitaFatta=false;
+  db.doc("config/main").onSnapshot(s=>{S.cfg=s.exists?s.data():null;S.cfgLoaded=true;render();if(!novitaFatta){novitaFatta=true;checkNovita();}});
   db.collection("mesi").onSnapshot(q=>{const o={};q.docs.forEach(d=>{o[d.id]=d.data()});S.months=o;S.monthsLoaded=true;render();});
   db.doc("conti/main").onSnapshot(s=>{S.contiExists=s.exists;S.conti=s.exists?s.data():{conti:[],saldi:{}};render();});
 })();
