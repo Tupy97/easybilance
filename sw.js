@@ -1,6 +1,6 @@
 /* EasyBilance – service worker: fa funzionare l'app anche senza connessione.
    Quando pubblichi una nuova versione, aumenta il numero in VERSIONE. */
-const VERSIONE = "easybilance-v1";
+const VERSIONE = "easybilance-v5";
 const FILE_APP = ["./", "index.html", "manifest.webmanifest", "icons/icon.svg", "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-512.png", "icons/icon-180.png"];
 
 self.addEventListener("install", e => {
