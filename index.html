@@ -352,8 +352,8 @@ button.hero-cell:hover{background:rgba(255,255,255,.1)}
 (function(){
 "use strict";
 const DEFAULT_CFG={"categorie": [{"id": "casa", "nome": "Casa", "tipo": "N", "desc": "affitto, mutuo, manutenzione"}, {"id": "trasporti", "nome": "Trasporti", "tipo": "N", "desc": "treno, bus, autostrada, parcheggi"}, {"id": "auto", "nome": "Auto", "tipo": "N", "desc": "rata, assicurazione, bollo, tagliando, revisione, gomme"}, {"id": "benzina", "nome": "Benzina", "tipo": "N", "desc": "benzina"}, {"id": "bollette", "nome": "Bollette", "tipo": "N", "desc": "acqua, energia, gas, internet, telefono"}, {"id": "spesa-condivisa", "nome": "Spesa condivisa", "tipo": "N", "desc": "spesa al supermercato condivisa"}, {"id": "spesa", "nome": "Spesa", "tipo": "N", "desc": "spesa al supermercato"}, {"id": "investimenti", "nome": "Investimenti", "tipo": "N", "desc": "piani di accumulo, accantonamenti"}, {"id": "spese-mediche", "nome": "Spese mediche", "tipo": "N", "desc": "visite mediche"}, {"id": "vestiti", "nome": "Vestiti", "tipo": "N", "desc": "vestiti"}, {"id": "cose-casa", "nome": "Cose casa", "tipo": "N", "desc": "mobili, elettronica, accessori casa, cucina"}, {"id": "cultura", "nome": "Cultura", "tipo": "N", "desc": "libri, musei, corsi"}, {"id": "assicurazione", "nome": "Assicurazione", "tipo": "N", "desc": "polizze e assicurazioni"}, {"id": "altro-necessita", "nome": "Altro necessità", "tipo": "N", "desc": "altro"}, {"id": "ristorante", "nome": "Ristorante", "tipo": "E", "desc": "ristorante, aperitivo, bar, pub"}, {"id": "palestra", "nome": "Palestra", "tipo": "E", "desc": "abbonamento, attrezzatura"}, {"id": "padel", "nome": "Padel", "tipo": "E", "desc": "partite, racchetta, palline, corso"}, {"id": "sport", "nome": "Sport", "tipo": "E", "desc": "costi legati alle altre attività sportive"}, {"id": "giochi", "nome": "Giochi", "tipo": "E", "desc": "boardgames, videogames"}, {"id": "svago", "nome": "Svago", "tipo": "E", "desc": "concerti, cinema, stadio, attività ludiche in generale"}, {"id": "vacanza", "nome": "Vacanza", "tipo": "E", "desc": "hotel, campeggio, b&b, aereo, treno, bus"}, {"id": "regali", "nome": "Regali", "tipo": "E", "desc": "regali"}, {"id": "intrattenimento", "nome": "Intrattenimento", "tipo": "E", "desc": "abbonamenti streaming"}, {"id": "altro-extra", "nome": "Altro extra", "tipo": "E", "desc": "altro"}], "budget": {"entrate": [], "extraPct": 0, "fisse": []}};
-const APP_VERSIONE="1.4";
-const APP_NOVITA=["Scheda Mese: in cima c’è “Da fare” con tutto quello che aspetta te. Le sezioni sotto si possono comprimere.","Conti: nuova sezione Piano (fondo obiettivi, giroconto, quadratura, grafico del patrimonio) e “Chiusura mese” guidata in 4 passi.","Impostazioni separate dal Budget, dietro l’icona a ingranaggio. Backup inviabile ad altre app con “Invia backup”.","Nuova spesa: spese frequenti a un tocco e “Duplica” sulle spese esistenti.","Grafica rifinita: contrasti più alti, pulsanti più grandi da toccare, moduli più brevi (le opzioni extra della spesa sono in “Altre opzioni”) e pulsante Salva sempre visibile.","Quadratura mensile nella scheda Conti: confronta la variazione dei saldi con entrate e spese e ti mostra lo scarto. I saldi ora hanno una data di lettura.","Ogni conto può avere una quota tua (es. il Joint al 50%) e delle riserve: soldi vincolati o non tuoi (es. i 7.710 €). Il saldo si inserisce totale e l’app calcola da sola patrimonio e liquidità libera.","Spese: tipo Normale, Annuale o Eccezionale, campo “di cui pagato con buoni”, flag carta di credito con controllo dell’addebito, avviso se una spesa condivisa non ha la quota.","Entrate: tipo (ricorrente, una tantum, rimborso), opzione “non incassata” per buoni e fringe, ed entrate ricorrenti da confermare ogni mese.","Nella scheda Mese trovi il mese ordinario: entrate ricorrenti, spesa ordinaria e risparmio ordinario. Nel Bilancio, il costo mensile strutturale.","Nuovo logo: una E e una B fuse in un’unica lettera, sui toni della nuova grafica."];
+const APP_VERSIONE="1.5";
+const APP_NOVITA=["Scheda Mese: in cima c’è “Da fare” con tutto quello che aspetta te. Le sezioni sotto si possono comprimere.","Conti: nuova sezione Piano (fondo obiettivi, giroconto, quadratura, grafico del patrimonio) e “Chiusura mese” guidata in 4 passi.","Impostazioni separate dal Budget, dietro l’icona a ingranaggio. Backup inviabile ad altre app con “Invia backup”.","Nuova spesa: spese frequenti a un tocco e “Duplica” sulle spese esistenti.","Grafica rifinita: contrasti più alti, pulsanti più grandi da toccare, moduli più brevi (le opzioni extra della spesa sono in “Altre opzioni”) e pulsante Salva sempre visibile.","Quadratura mensile nella scheda Conti: confronta la variazione dei saldi con entrate e spese e ti mostra lo scarto. I saldi ora hanno una data di lettura.","Ogni conto può avere una quota tua (es. il Joint al 50%) e delle riserve: soldi vincolati o non tuoi (es. i 7.710 €). Il saldo si inserisce totale e l’app calcola da sola patrimonio e liquidità libera.","Spese: tipo Normale, Annuale o Eccezionale, campo “di cui pagato con buoni”, flag carta di credito con controllo dell’addebito, avviso se una spesa condivisa non ha la quota.","Entrate: tipo (ordinaria, una tantum, rimborso) e opzione “non incassata” per buoni e fringe.","Nella scheda Mese trovi il mese ordinario: entrate ricorrenti, spesa ordinaria e risparmio ordinario. Nel Bilancio, il costo mensile strutturale.","Nuovo logo: una E e una B fuse in un’unica lettera, sui toni della nuova grafica.","Riserve: nuovo tipo “Emergenza” (resta nel patrimonio, fuori dal fondo obiettivi). Il Piano ora parte dal patrimonio totale. Il saldo Splid è trattato come credito: niente rosso se scende.","Tolte le entrate ricorrenti: le entrate si inseriscono ogni mese, il tipo “Ricorrente” è diventato “Ordinaria”."];
 const MESI=["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
 const MESI_B=["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"];
 const eur=new Intl.NumberFormat("it-IT",{style:"currency",currency:"EUR"});
@@ -390,9 +390,9 @@ const saldoMio=(a,ym)=>saldoAl(a,ym)*qOf(a)-riserveAl(a,ym,"A");
 const iniMio=a=>(+a.saldoIniziale||0)*qOf(a);
 const patrim=(C,ym)=>sum(C.map(a=>saldoMio(a,ym)));
 const vincolate=(C,ym)=>sum(C.map(a=>riserveAl(a,ym,"V")));
-const TIPI_E=[["R","Ricorrente"],["U","Una tantum"],["B","Rimborso"]];
-const ricEList=()=>(S.cfg&&S.cfg.ricorrentiE)||[];
-function dueRicE(ym){if(ym>ymNow())return[];const m=md(ym);const done=new Set(m.entrate.map(x=>x.ric).filter(Boolean)),skip=new Set(m.saltate);return ricEList().filter(r=>r.attiva!==false&&r.dal<=ym&&(!r.al||r.al>=ym)&&!done.has(r.id)&&!skip.has(r.id));}
+const emergenza=(C,ym)=>sum(C.map(a=>riserveAl(a,ym,"E")));
+const isCredito=a=>a.tipo==="Credito"||/splid/i.test(a.nome||"");
+const TIPI_E=[["R","Ordinaria"],["U","Una tantum"],["B","Rimborso"]];
 const secOpen=id=>{try{return localStorage.getItem("eb.sec."+id)!=="0";}catch(e){return true;}};
 const secH=(id,title,body)=>'<details class="sec" data-sec="'+id+'"'+(secOpen(id)?" open":"")+'><summary><h2>'+title+'</h2></summary>'+body+'</details>';
 const canShareFiles=()=>{try{return typeof navigator.canShare==="function"&&navigator.canShare({files:[new File(["{}"],"b.json",{type:"application/json"})]});}catch(e){return false;}};
@@ -557,9 +557,8 @@ function vHome(){
     if(S.ym===ymNow()){const cd=chiusuraDue();if(cd){n++;rowsT+=tr(cd===ymNow()?'Il mese sta finendo: saldi, carta, quadratura e giroconto in 4 passi.':'Mancano i saldi di '+MESI[+cd.slice(5)-1]+': chiudi il mese.',"Chiusura","chiusura\" data-ym=\""+cd);}}
     {const nq=nSenzaQuota(S.ym);if(nq.length){n++;rowsT+=tr(nq.length+(nq.length===1?' spesa condivisa':' spese condivise')+' senza quota: la cifra potrebbe essere il totale.',"Vedi","warnQ");}}
     if((S.conti.conti||[]).length&&S.ym>=ymShift(ymNow(),-1)&&S.ym<=ymNow()){const tp=tot(ymShift(S.ym,-1));if(tp.carta>0&&md(S.ym).addebitoCarta==null){n++;rowsT+=tr('Carta di credito: a '+MESI[+S.ym.slice(5)-1]+' dovrebbero uscire circa '+f(tp.carta)+'. Indica l’addebito reale.',"Indica","carta");}}
-    const due=dueRic(S.ym),dueE=dueRicE(S.ym);
+    const due=dueRic(S.ym);
     if(due.length){n+=due.length;rowsT+='<div class="todo-h"><span>Spese ricorrenti</span>'+(due.length>1?'<button class="link" data-act="ricAll">Conferma tutte</button>':'')+'</div>'+due.map(r=>{const c=catById(r.cat);return'<div class="ric"><span><b>'+esc(r.desc||c.nome)+'</b><div class="sub">'+esc(c.nome)+' · il '+r.giorno+' del mese'+(r.quota?' · tua parte ('+quotaLbl(r.quota)+')':'')+'</div></span><b class="num">'+f(ricAmt(r))+'</b><div class="btns"><button class="ok" data-act="ricOk" data-id="'+esc(r.id)+'">Conferma</button><button class="no" data-act="ricNo" data-id="'+esc(r.id)+'">Salta questo mese</button></div></div>'}).join("");}
-    if(dueE.length){n+=dueE.length;rowsT+='<div class="todo-h"><span>Entrate ricorrenti</span>'+(dueE.length>1?'<button class="link" data-act="ricEAll">Conferma tutte</button>':'')+'</div>'+dueE.map(r=>'<div class="ric"><span><b>'+esc(r.desc||"Entrata")+'</b><div class="sub">'+esc((TIPI_E.find(x=>x[0]===(r.tipo||"R"))||TIPI_E[0])[1])+(r.nc?' · non incassata':'')+'</div></span><b class="num">'+fP(r.importo)+'</b><div class="btns"><button class="ok" data-act="ricEOk" data-id="'+esc(r.id)+'">Conferma</button><button class="no" data-act="ricENo" data-id="'+esc(r.id)+'">Salta questo mese</button></div></div>').join("");}
     if(n)h+='<section class="card todo-card" style="padding-block:12px"><div class="row"><div class="label">Da fare</div><span class="pill warn">'+n+'</span></div>'+rowsT+'</section>';}
   h+='<section class="card hero"><div class="label">Uscite di '+MESI[+S.ym.slice(5)-1]+'</div><div class="big num">'+f(t.tot)+'</div>'+
      '<div class="split" aria-hidden="true"><i class="need-c" style="width:'+nW+'%"></i><i class="extra-c" style="width:'+(t.tot?100-nW:0)+'%"></i></div>'+
@@ -568,7 +567,7 @@ function vHome(){
      '<div class="hero-cell"><span>Risparmio</span><b class="num '+(t.ent?(risp>=0?"pos":"neg"):"")+'">'+(t.ent?fP(risp):"–")+'</b><small>'+(t.ent?pct(risp/t.ent)+" delle entrate":"Servono le entrate")+'</small></div></div></section>';
   if(t.has&&(t.ann+t.ecc>0||t.entU>0||t.entNc>0)){const eo=t.entR+t.entB,ro=eo-t.ord;
     h+='<section class="card"><div class="label">Mese ordinario</div>'+
-      '<div class="kv"><span>Entrate ricorrenti e rimborsi</span><b class="num">'+fP(eo)+'</b></div>'+
+      '<div class="kv"><span>Entrate ordinarie e rimborsi</span><b class="num">'+fP(eo)+'</b></div>'+
       '<div class="kv"><span>Spesa ordinaria</span><b class="num">'+f(t.ord)+'</b></div>'+
       '<div class="kv"><span>Risparmio ordinario</span><b class="num '+(ro>=0?"pos":"neg")+'">'+fP(ro)+'</b></div>'+
       '<div class="sub" style="margin-top:8px">Esclusi dal conto: spese annuali '+f(t.ann)+', eccezionali '+f(t.ecc)+(t.entU?', entrate una tantum '+fP(t.entU):'')+'.'+(t.entNc?' Entrate non incassate (buoni, fringe): '+fP(t.entNc)+'.':'')+'</div></section>';}
@@ -676,13 +675,14 @@ function patrimSVG(pts){
   return o+'</svg>';
 }
 function vPiano(C){
-  const tNow=patrim(C,S.ym),vinc=vincolate(C,S.ym),lib=tNow-vinc,wv=tNow>0?Math.max(0,Math.min(100,vinc/tNow*100)):0;
-  let h='<section class="card hero"><div class="label">Fondo obiettivi (libero)</div><div class="bigamt num '+(lib<0?"neg":"")+'" style="margin-top:4px">'+fP(lib)+'</div>'+
-    '<div class="bar2" aria-hidden="true"><i style="width:'+wv+'%;background:var(--need)"></i><i style="width:'+(100-wv)+'%;background:var(--good)"></i></div>'+
-    '<div class="legend"><span><span class="dot need-c"></span>Vincolato <b class="num">'+fP(vinc)+'</b></span><span><span class="dot" style="background:var(--good)"></span>Libero <b class="num">'+fP(lib)+'</b></span></div>'+
-    '<div class="kv" style="margin-top:12px"><span>Patrimonio</span><b class="num">'+fP(tNow)+'</b></div>';
+  const tNow=patrim(C,S.ym),vinc=vincolate(C,S.ym),em=emergenza(C,S.ym),lib=tNow-vinc-em;
+  const pc=v=>tNow>0?Math.max(0,Math.min(100,v/tNow*100)):0;
+  let h='<section class="card hero"><div class="label">Patrimonio</div><div class="bigamt num" style="margin-top:4px">'+fP(tNow)+'</div>'+
+    '<div class="bar2" aria-hidden="true"><i style="width:'+pc(em)+'%;background:var(--accent)"></i><i style="width:'+pc(vinc)+'%;background:var(--need)"></i><i style="width:'+pc(Math.max(0,lib))+'%;background:var(--good)"></i></div>'+
+    '<div class="legend"><span><span class="dot" style="background:var(--accent)"></span>Emergenza <b class="num">'+fP(em)+'</b></span><span><span class="dot need-c"></span>Vincolato <b class="num">'+fP(vinc)+'</b></span><span><span class="dot" style="background:var(--good)"></span>Fondo obiettivi <b class="num '+(lib<0?"neg":"")+'">'+fP(lib)+'</b></span></div>'+
+    '<div class="sub" style="margin-top:10px">Il patrimonio comprende tutto ciò che è tuo. Emergenza e vincolato sono la parte che non conta come disponibile per gli obiettivi.</div>';
   const ris=[];C.forEach(a=>(a.riserve||[]).forEach(r=>{if((r.da||"0000-00")<=S.ym)ris.push({a,r});}));
-  ris.forEach(({a,r})=>{h+='<div class="kv"><span>'+esc(r.nome||"Riserva")+' <span class="sub">'+esc(a.nome)+(r.tipo==="A"?" · non mia, esclusa dal patrimonio":"")+'</span></span><b class="num">'+fP(r.importo)+'</b></div>';});
+  ris.forEach(({a,r})=>{h+='<div class="kv"><span>'+esc(r.nome||"Riserva")+' <span class="sub">'+esc(a.nome)+(r.tipo==="A"?" · non mia, esclusa dal patrimonio":r.tipo==="E"?" · emergenza, nel patrimonio":" · vincolata, nel patrimonio")+'</span></span><b class="num">'+fP(r.importo)+'</b></div>';});
   h+='</section>';
   const g=giroconto(S.ym);
   h+='<div class="sect-h"><h2>Giroconto di fine mese</h2><button class="link" data-act="chiusuraCfg">Imposta</button></div><section class="card">';
@@ -691,7 +691,7 @@ function vPiano(C){
   h+='<div class="actions" style="margin-top:12px"><button class="btn" data-act="chiusura" data-ym="'+S.ym+'">Chiusura mese</button></div></section>';
   h+=quadHTML(S.ym,true);
   const keys=Object.keys(S.conti.saldi||{}).sort().slice(-18);
-  const pts=keys.map(k=>({k,tot:patrim(C,k),lib:patrim(C,k)-vincolate(C,k)}));
+  const pts=keys.map(k=>({k,tot:patrim(C,k),lib:patrim(C,k)-vincolate(C,k)-emergenza(C,k)}));
   h+='<div class="sect-h"><h2>Patrimonio nel tempo</h2></div><section class="card">'+(pts.length>=2?'<div class="chart">'+patrimSVG(pts)+'</div><div class="chart-leg"><span><span class="dot" style="background:var(--accent)"></span>Totale</span><span><span class="dot" style="background:var(--good)"></span>Libero (tratteggio)</span></div>':'<div class="empty" style="padding:16px"><b>Servono due mesi di saldi</b>Il grafico compare quando hai i saldi di almeno due mesi.</div>')+'</section>';
   return h;
 }
@@ -708,7 +708,7 @@ function vConti(){
     ((S.conti.saldiData||{})[S.ym]?'<div class="sub" style="margin-top:6px">Saldi letti il '+new Date(S.conti.saldiData[S.ym]+"T12:00:00").toLocaleDateString("it-IT",{day:"numeric",month:"long"})+'</div>':'')+
     '<div class="actions" style="margin-top:14px"><button class="btn ghost" data-act="saldi">'+(upd?"Modifica saldi":"Aggiorna saldi")+'</button><button class="btn" data-act="chiusura" data-ym="'+S.ym+'">Chiusura mese</button></div></section>';
   h+='<div class="sect-h"><h2>I tuoi conti</h2><button class="link" data-act="acc" data-id="">Aggiungi</button></div><section class="card" style="padding-block:4px"><div class="list">'+
-    C.map(a=>{const v=saldoMio(a,S.ym),d=v-saldoMio(a,yStart);const has=upd&&upd[a.id]!=null;const raw=saldoAl(a,S.ym);const ex=(Math.abs(raw-v)>0.005?" · sul conto "+fP(raw):"")+(qOf(a)<1?" · tua quota "+pct(qOf(a)):"");return'<button class="item" data-act="acc" data-id="'+esc(a.id)+'"><span class="ico N">'+esc(a.nome.slice(0,1).toUpperCase())+'</span><span style="min-width:0"><div class="t">'+esc(a.nome)+'</div><div class="s">'+esc(a.tipo||"")+ex+(has?"":" · saldo non aggiornato questo mese")+'</div></span><span style="text-align:right"><div class="a num">'+fP(v)+'</div><div class="s num '+(d>=0?"pos":"neg")+'" title="Da inizio anno">'+(d>=0?"+":"")+fP(d)+' da gen.</div></span></button>'}).join("")+'</div></section>';
+    C.map(a=>{const v=saldoMio(a,S.ym),d=v-saldoMio(a,yStart);const has=upd&&upd[a.id]!=null;const raw=saldoAl(a,S.ym);const ex=(Math.abs(raw-v)>0.005?" · sul conto "+fP(raw):"")+(qOf(a)<1?" · tua quota "+pct(qOf(a)):"");return'<button class="item" data-act="acc" data-id="'+esc(a.id)+'"><span class="ico N">'+esc(a.nome.slice(0,1).toUpperCase())+'</span><span style="min-width:0"><div class="t">'+esc(a.nome)+'</div><div class="s">'+esc(a.tipo||"")+ex+(has?"":" · saldo non aggiornato questo mese")+'</div></span><span style="text-align:right"><div class="a num">'+fP(v)+'</div><div class="s num '+(isCredito(a)?"":(d>=0?"pos":"neg"))+'" title="Da inizio anno">'+(isCredito(a)?"a gen. era "+fP(saldoMio(a,yStart)):(d>=0?"+":"")+fP(d)+" da gen.")+'</div></span></button>'}).join("")+'</div></section>';
   const rows=[];for(let i=1;i<=12;i++){const k=y+"-"+pad(i);if(S.conti.saldi&&S.conti.saldi[k])rows.push([k,patrim(C,k)]);}
   if(rows.length){h+='<div class="sect-h"><h2>Andamento '+y+'</h2></div><section class="card"><div class="tbl-wrap"><table><thead><tr><th>Mese</th><th>Totale</th><th>Variazione</th></tr></thead><tbody>'+rows.map((r,i)=>{const pv=i?rows[i-1][1]:tY;const dv=r[1]-pv;return'<tr><td>'+MESI_B[+r[0].slice(5)-1]+'</td><td>'+fP(r[1])+'</td><td class="'+(dv>=0?"pos":"neg")+'">'+(dv>=0?"+":"")+fP(dv)+'</td></tr>'}).join("")+'</tbody></table></div></section>';}
   return h;
@@ -734,7 +734,6 @@ function vImp(){
   const bk=S.cfg&&S.cfg.ultimoBackup?'Ultimo: '+new Date(S.cfg.ultimoBackup+"T12:00:00").toLocaleDateString("it-IT",{day:"numeric",month:"long",year:"numeric"}):'Non ancora esportato';
   let h='<div class="sect-h"><h2>Automatismi</h2></div><section class="card" style="padding-block:4px">'+
     '<button class="set-item" data-act="ricList"><span>Spese ricorrenti</span><span class="v">'+ricList().length+' ›</span></button>'+
-    '<button class="set-item" data-act="ricEList"><span>Entrate ricorrenti</span><span class="v">'+ricEList().length+' ›</span></button>'+
     '<button class="set-item" data-act="chiusuraCfg"><span>Giroconto di fine mese<div class="sub">Conto di origine, soglia e destinazione</div></span><span class="v">›</span></button>'+
     '<button class="set-item" data-act="editCats"><span>Categorie</span><span class="v">'+cats().length+' ›</span></button></section>';
   h+='<div class="sect-h"><h2>Dati</h2></div><section class="card" style="padding-block:4px">'+
@@ -968,17 +967,17 @@ function sheetCat(id){
 
 function sheetAcc(id){
   const C=S.conti.conti||[];const a=id?C.find(x=>x.id===id):null;
-  const TIPI=["Corrente","Risparmio","Investimenti","Contanti"];
+  const TIPI=["Corrente","Risparmio","Investimenti","Contanti","Credito"];
   openSheet('<h3>'+(a?"Modifica conto":"Nuovo conto")+'</h3>'+
     '<label class="fld"><span>Nome</span><input class="inp" id="a-n" value="'+esc(a?a.nome:"")+'" maxlength="40" autofocus placeholder="Es. Conto corrente"></label>'+
     '<label class="fld"><span>Tipo</span><select class="inp" id="a-t">'+TIPI.map(t=>'<option'+(a&&a.tipo===t?" selected":"")+'>'+t+'</option>').join("")+'</select></label>'+
     '<label class="fld"><span>Saldo iniziale (€)</span><input class="inp num" id="a-s" inputmode="decimal" value="'+esc(a?amtStr(a.saldoIniziale):"")+'" placeholder="0,00"></label>'+
     '<label class="fld"><span>Quanto è tuo (%)</span><input class="inp num" id="a-q" inputmode="decimal" value="'+esc(a&&qOf(a)<1?amtStr(Math.round(qOf(a)*1000)/10):"100")+'" placeholder="100"></label>'+
-    '<div class="fld"><span>Riserve</span></div><p class="sub" style="margin:-4px 0 8px">Soldi sul conto che non sono liberi. “Vincolata” è tua ma messa da parte (es. fondo emergenza): resta nel patrimonio ma non nel fondo obiettivi. “Non mia” è di altri (es. i soldi dell’assicurazione da girare): esce dal patrimonio. Da quel mese in poi scrivi nei saldi il totale del conto.</p><div id="a-ris"></div><button type="button" class="add-line" id="a-radd">+ Aggiungi riserva</button>'+
+    '<div class="fld"><span>Riserve</span></div><p class="sub" style="margin:-4px 0 8px">Soldi sul conto che non sono liberi. “Emergenza” è tua e subito disponibile, ma la usi solo per emergenze: resta nel patrimonio e non conta nel fondo obiettivi. “Vincolata” è tua ma bloccata o destinata (es. accantonamento): resta nel patrimonio ma non nel fondo obiettivi. “Non mia” è di altri (es. i soldi dell’assicurazione da girare): esce dal patrimonio. Da quel mese in poi scrivi nei saldi il totale del conto.</p><div id="a-ris"></div><button type="button" class="add-line" id="a-radd">+ Aggiungi riserva</button>'+
     '<div class="err" id="a-err"></div><div class="actions">'+(a?'<button type="button" class="btn danger" id="a-del">Elimina</button>':'<button type="button" class="btn ghost" data-act="close">Annulla</button>')+'<button type="button" class="btn" id="a-save">Salva</button></div>',
   sh=>{
-    const ris=((a&&a.riserve)||[]).map(r=>({nome:r.nome||"",v:r.importo,t:r.tipo==="A"?"A":"V",da:r.da||""}));
-    const drawR=()=>{sh.querySelector("#a-ris").innerHTML=ris.map((r,i)=>'<div class="fisse-row"><div class="fr1"><input class="inp" data-ri="'+i+'" data-rk="nome" value="'+esc(r.nome)+'" placeholder="Nome (es. Emergenza)"><button type="button" class="x" data-rrm="'+i+'" aria-label="Rimuovi">×</button></div><div class="fr2"><input class="inp num" data-ri="'+i+'" data-rk="v" inputmode="decimal" value="'+esc(amtStr(r.v))+'" placeholder="€"><select class="inp" data-ri="'+i+'" data-rk="t"><option value="V"'+(r.t==="V"?" selected":"")+'>Vincolata</option><option value="A"'+(r.t==="A"?" selected":"")+'>Non mia</option></select><input class="inp" type="month" data-ri="'+i+'" data-rk="da" value="'+esc(r.da)+'" aria-label="Valida dal mese"></div></div>').join("");};
+    const ris=((a&&a.riserve)||[]).map(r=>({nome:r.nome||"",v:r.importo,t:r.tipo==="A"?"A":r.tipo==="E"?"E":"V",da:r.da||""}));
+    const drawR=()=>{sh.querySelector("#a-ris").innerHTML=ris.map((r,i)=>'<div class="fisse-row"><div class="fr1"><input class="inp" data-ri="'+i+'" data-rk="nome" value="'+esc(r.nome)+'" placeholder="Nome (es. Emergenza)"><button type="button" class="x" data-rrm="'+i+'" aria-label="Rimuovi">×</button></div><div class="fr2"><input class="inp num" data-ri="'+i+'" data-rk="v" inputmode="decimal" value="'+esc(amtStr(r.v))+'" placeholder="€"><select class="inp" data-ri="'+i+'" data-rk="t"><option value="V"'+(r.t==="V"?" selected":"")+'>Vincolata</option><option value="E"'+(r.t==="E"?" selected":"")+'>Emergenza</option><option value="A"'+(r.t==="A"?" selected":"")+'>Non mia</option></select><input class="inp" type="month" data-ri="'+i+'" data-rk="da" value="'+esc(r.da)+'" aria-label="Valida dal mese"></div></div>').join("");};
     drawR();
     const updR=e=>{const t=e.target;if(t.dataset.ri!=null)ris[+t.dataset.ri][t.dataset.rk]=t.value;};
     sh.addEventListener("input",updR);sh.addEventListener("change",updR);
@@ -991,7 +990,7 @@ function sheetAcc(id){
       if(!n){sh.querySelector("#a-err").textContent="Dai un nome al conto.";return;}
       if(!isFinite(s)){sh.querySelector("#a-err").textContent="Il saldo iniziale deve essere un numero.";return;}
       const qp=parseAmt(sh.querySelector("#a-q").value||"100");if(!(qp>0&&qp<=100)){sh.querySelector("#a-err").textContent="La quota deve essere tra 1 e 100.";return;}
-      const rOut=[];for(const r of ris){if(!r.nome.trim()&&(r.v===""||r.v==null))continue;const n2=parseAmt(r.v);if(!isFinite(n2)||n2<0){sh.querySelector("#a-err").textContent="Controlla l’importo della riserva “"+(r.nome||"senza nome")+"”.";return;}rOut.push({nome:r.nome.trim()||"Riserva",importo:n2,tipo:r.t==="A"?"A":"V",da:/^\d{4}-\d{2}$/.test(r.da)?r.da:""});}
+      const rOut=[];for(const r of ris){if(!r.nome.trim()&&(r.v===""||r.v==null))continue;const n2=parseAmt(r.v);if(!isFinite(n2)||n2<0){sh.querySelector("#a-err").textContent="Controlla l’importo della riserva “"+(r.nome||"senza nome")+"”.";return;}rOut.push({nome:r.nome.trim()||"Riserva",importo:n2,tipo:r.t==="A"?"A":r.t==="E"?"E":"V",da:/^\d{4}-\d{2}$/.test(r.da)?r.da:""});}
       const c=clone(S.conti);c.conti=c.conti||[];c.saldi=c.saldi||{};
       const ext=o=>{if(qp<100)o.quota=qp/100;else delete o.quota;if(rOut.length)o.riserve=rOut;else delete o.riserve;};
       if(a){const x=c.conti.find(x=>x.id===id);x.nome=n;x.tipo=sh.querySelector("#a-t").value;x.saldoIniziale=s;ext(x);}
@@ -1026,7 +1025,7 @@ function sheetEntrate(ym){
     '<div class="fr2" style="grid-template-columns:1fr 1.3fr"><input class="inp num" data-i="'+i+'" data-k="v" inputmode="decimal" value="'+esc(amtStr(r.v))+'" placeholder="€" aria-label="Importo"><select class="inp" data-i="'+i+'" data-k="t" aria-label="Tipo">'+TIPI_E.map(([k,l])=>'<option value="'+k+'"'+(r.t===k?" selected":"")+'>'+l+'</option>').join("")+'</select></div>'+
     '<label class="check acc" style="margin:8px 0 0"><input type="checkbox" data-i="'+i+'" data-k="nc"'+(r.nc?" checked":"")+'><span>Non incassata: non entra su un conto (buoni pasto, fringe benefit)</span></label></div>').join("");
     sh.querySelector("#rtot").textContent=totTxt();};
-  openSheet('<h3>Entrate di '+esc(ymLabel(ym))+'</h3><p class="sub" style="margin:-8px 0 6px">Ricorrente: stipendio e simili. Una tantum: risarcimenti, vendite, regali. Rimborso: spese anticipate che ti vengono restituite. Le ricorrenti si inseriscono da sole dalla scheda Budget.</p><div id="rows"></div><button type="button" class="add-line" id="radd" style="margin-top:12px">+ Aggiungi voce</button><div class="row" style="margin-bottom:12px"><span class="sub">Totale</span><b class="num" id="rtot"></b></div><div class="err" id="rerr"></div><div class="actions"><button type="button" class="btn ghost" data-act="close">Annulla</button><button type="button" class="btn" id="rsave">Salva</button></div>',
+  openSheet('<h3>Entrate di '+esc(ymLabel(ym))+'</h3><p class="sub" style="margin:-8px 0 6px">Ordinaria: stipendio, buoni, trasferte. Una tantum: risarcimenti, vendite, regali. Rimborso: spese anticipate che ti vengono restituite.</p><div id="rows"></div><button type="button" class="add-line" id="radd" style="margin-top:12px">+ Aggiungi voce</button><div class="row" style="margin-bottom:12px"><span class="sub">Totale</span><b class="num" id="rtot"></b></div><div class="err" id="rerr"></div><div class="actions"><button type="button" class="btn ghost" data-act="close">Annulla</button><button type="button" class="btn" id="rsave">Salva</button></div>',
   sh=>{draw(sh);
     const upd=e=>{const t=e.target;if(t.dataset.i!=null){data[+t.dataset.i][t.dataset.k]=t.type==="checkbox"?t.checked:t.value;sh.querySelector("#rtot").textContent=totTxt();}};
     sh.addEventListener("input",upd);sh.addEventListener("change",upd);
@@ -1035,39 +1034,6 @@ function sheetEntrate(ym){
     sh.querySelector("#rsave").onclick=()=>{const out=[];for(const r of data){if(!String(r.desc).trim()&&(r.v===""||r.v==null))continue;const n=parseAmt(r.v);if(!isFinite(n)){sh.querySelector("#rerr").textContent="Controlla l’importo di “"+(r.desc||"voce senza nome")+"”.";return;}
       const o={id:uid(),desc:String(r.desc).trim()||"Entrata",importo:n};if(r.t==="U"||r.t==="B")o.tipo=r.t;if(r.nc)o.nc=true;if(r.ric)o.ric=r.ric;out.push(o);}
       closeSheet();const x=clone(md(ym));x.entrate=out;saveMonth(ym,x).then(ok=>ok&&toast("Entrate salvate"));};
-  });
-}
-async function ricEConfirm(ids){const m=clone(md(S.ym));const rs=ricEList().filter(r=>ids.includes(r.id));
-  rs.forEach(r=>{const o={id:uid(),desc:r.desc,importo:r.importo,ric:r.id};if(r.tipo==="U"||r.tipo==="B")o.tipo=r.tipo;if(r.nc)o.nc=true;m.entrate.push(o);});REC={};
-  if(await saveMonth(S.ym,m))toast(rs.length>1?rs.length+" entrate registrate":"Entrata registrata");}
-async function ricESkip(id){const m=clone(md(S.ym));m.saltate=(m.saltate||[]).concat([id]);REC={};if(await saveMonth(S.ym,m))toast("Saltata per "+MESI[+S.ym.slice(5)-1]);}
-function sheetRicEList(){
-  const L=ricEList();
-  openSheet('<h3>Entrate ricorrenti</h3><p class="sub" style="margin:-8px 0 14px">Stipendio, buoni pasto, fringe benefit: ogni mese compaiono nella scheda Mese, pronte da confermare. Se un importo cambia, metti una data di fine alla voce vecchia e creane una nuova.</p>'+
-    (L.length?L.map(r=>'<button class="set-item" data-rid="'+esc(r.id)+'"><span>'+esc(r.desc||"Entrata")+'<div class="sub">dal '+esc(r.dal||"")+(r.al?' al '+esc(r.al):'')+(r.nc?' · non incassata':'')+(r.attiva===false?' · in pausa':'')+'</div></span><span class="v num">'+f(r.importo)+' ›</span></button>').join(""):'<div class="empty" style="padding:12px"><b>Nessuna entrata ricorrente</b>Aggiungi lo stipendio e le altre entrate fisse.</div>')+
-    '<button class="add-line" style="margin-top:12px" data-rid="">+ Nuova entrata ricorrente</button>',
-  sh=>sh.addEventListener("click",e=>{const b=e.target.closest("[data-rid]");if(b)sheetRicE(b.dataset.rid||null)}));
-}
-function sheetRicE(id){
-  const r=id?ricEList().find(x=>x.id===id):null;let tipo=r&&r.tipo?r.tipo:"R";
-  openSheet('<h3>'+(r?"Modifica entrata ricorrente":"Nuova entrata ricorrente")+'</h3>'+
-    '<label class="fld"><span>Descrizione</span><input class="inp" id="e-d" value="'+esc(r?r.desc:"")+'" maxlength="120" placeholder="Es. Stipendio, buoni pasto"></label>'+
-    '<label class="fld"><span>Importo (€)</span><input class="inp num" id="e-a" inputmode="decimal" value="'+esc(r?amtStr(r.importo):"")+'" placeholder="0,00"></label>'+
-    '<label class="fld"><span>Tipo</span><select class="inp" id="e-t">'+TIPI_E.map(([k,l])=>'<option value="'+k+'"'+(tipo===k?" selected":"")+'>'+l+'</option>').join("")+'</select></label>'+
-    '<label class="check acc"><input type="checkbox" id="e-nc"'+(r&&r.nc?" checked":"")+'><span>Non incassata: non entra su un conto (buoni pasto, fringe benefit)</span></label>'+
-    '<div class="grid2"><label class="fld"><span>Dal mese</span><input class="inp" type="month" id="e-dal" value="'+esc(r?r.dal:ymNow())+'"></label><label class="fld"><span>Al mese (facoltativo)</span><input class="inp" type="month" id="e-al" value="'+esc(r&&r.al?r.al:"")+'"></label></div>'+
-    (r?'<label class="check acc"><input type="checkbox" id="e-on"'+(r.attiva!==false?" checked":"")+'><span>Attiva (togli la spunta per metterla in pausa)</span></label>':'')+
-    '<div class="err" id="e-err"></div><div class="actions">'+(r?'<button type="button" class="btn danger" id="e-del">Elimina</button>':'<button type="button" class="btn ghost" data-act="close">Annulla</button>')+'<button type="button" class="btn" id="e-s">Salva</button></div>',
-  sh=>{const $$=q=>sh.querySelector(q);
-    const del=$$("#e-del");if(del)del.onclick=()=>{if(!del.classList.contains("arm")){del.classList.add("arm");del.textContent="Conferma";return;}
-      const cf=clone(S.cfg);cf.ricorrentiE=(cf.ricorrentiE||[]).filter(x=>x.id!==id);closeSheet();REC={};saveCfg(cf).then(ok=>ok&&undoToast("Entrata ricorrente eliminata"));};
-    $$("#e-s").onclick=()=>{const d=$$("#e-d").value.trim(),a=parseAmt($$("#e-a").value),dal=$$("#e-dal").value,al=$$("#e-al").value,err=$$("#e-err");
-      if(!(a>0)){err.textContent="Inserisci un importo maggiore di zero.";return;}
-      if(!/^\d{4}-\d{2}$/.test(dal)){err.textContent="Indica da quale mese vale.";return;}
-      if(al&&(!/^\d{4}-\d{2}$/.test(al)||al<dal)){err.textContent="Il mese finale non può essere prima di quello iniziale.";return;}
-      const t=$$("#e-t").value;const o={id:r?r.id:uid(),desc:d||"Entrata",importo:a,tipo:t,nc:$$("#e-nc").checked,dal,attiva:r?$$("#e-on").checked:true};if(al)o.al=al;
-      const cf=clone(S.cfg);cf.ricorrentiE=cf.ricorrentiE||[];const i=cf.ricorrentiE.findIndex(x=>x.id===o.id);if(i>=0)cf.ricorrentiE[i]=o;else cf.ricorrentiE.push(o);
-      closeSheet();REC={};saveCfg(cf).then(ok=>ok&&toast("Entrata ricorrente salvata"));};
   });
 }
 function sheetChiusuraCfg(back){
@@ -1130,7 +1096,7 @@ function sheetChiusura(ym,step){
 /* ---------- tour delle novità ---------- */
 const TOUR=[
   {v:"home",t:"Da fare",sel:".todo-card",miss:"Oggi non c’è niente in sospeso: la card compare solo quando serve.",
-   x:"In cima alla scheda Mese trovi tutto quello che aspetta te: ricorrenti da confermare, spese senza quota, addebito della carta, backup e chiusura del mese. Le sezioni più in basso si comprimono toccando il titolo."},
+   x:"In cima alla scheda Mese trovi tutto quello che aspetta te: spese senza quota, addebito della carta, backup e chiusura del mese. Le sezioni più in basso si comprimono toccando il titolo."},
   {v:"conti",ct:"conti",t:"Chiusura del mese",sel:'[data-act="chiusura"]',miss:"Compare quando hai almeno un conto.",
    x:"Il pulsante guida il tuo rito di fine mese in 4 passi: saldi con data di lettura, addebito della carta, quadratura e giroconto. Fallo prima di spostare i soldi."},
   {v:"conti",ct:"piano",t:"Piano",sel:".hero",miss:"Compare quando hai almeno un conto.",
@@ -1144,7 +1110,7 @@ const TOUR=[
    x:"Aprendo una nuova spesa, in cima trovi le tue spese più frequenti: un tocco e il modulo è compilato. Su una spesa esistente, “Duplica” ne crea una nuova con gli stessi dati.",
    act:["Apri una spesa",()=>{const x=sortSpese(md(S.ym).spese)[0];if(x)sheetSpesa(x.data.slice(0,7),x.id);else toast("Registra prima una spesa in questo mese");}]},
   {v:"home",t:"Entrate",
-   x:"Ogni entrata può essere ricorrente, una tantum o rimborso, ed essere segnata come non incassata (buoni pasto, fringe). Le entrate ricorrenti le crei una volta in Impostazioni e ogni mese ti vengono proposte da confermare.",
+   x:"Ogni entrata può essere ordinaria (stipendio, trasferte, buoni), una tantum o rimborso, ed essere segnata come non incassata (buoni pasto, fringe). Gli importi si inseriscono ogni mese a mano, perché cambiano.",
    act:["Apri le entrate",()=>sheetEntrate(S.ym)]},
   {v:"anno",t:"Costo mensile strutturale",sel:".sect-h + .card",miss:"Compare quando hai spese registrate nell’anno.",
    x:"Nel Bilancio vedi la spesa ordinaria media più le spese annuali divise per 12, con le eccezionali escluse. Nella scheda Mese, “Mese ordinario” fa lo stesso per il singolo mese."},
@@ -1226,9 +1192,9 @@ function sheetGuide(){
     sec("I conti","Aggiungi i tuoi conti con il saldo di partenza. A inizio mese tocca “Aggiorna i saldi” e scrivi quanto c’è su ciascuno: l’app mostra il patrimonio e come cambia da inizio anno.")+
     sec("Il budget","In questa scheda imposti, anno per anno, il reddito netto, la percentuale da dedicare agli extra e le spese necessarie previste, al mese o all’anno. Un anno nuovo parte con il budget di quello precedente.","Se colleghi una spesa prevista a una categoria, nella scheda Mese vedi “Previsto e speso”: quanto hai speso in quella categoria rispetto alla quota mensile prevista.")+
     sec("Tipo di spesa, buoni e carta","Ogni spesa può essere Normale, Annuale (bollo, assicurazione, gomme) o Eccezionale (un acquisto fuori dall’ordinario). Nella scheda Mese e in Bilancio vedi il mese ordinario e il costo mensile strutturale, che escludono le eccezionali e spalmano le annuali. “Di cui pagato con buoni” segna la parte pagata con buoni pasto; “Carta di credito” indica che l’addebito esce dal conto il mese dopo. Registra la spesa nel mese in cui la fai.")+
-    sec("Entrate","Ogni entrata è Ricorrente, Una tantum o Rimborso, e può essere “non incassata” (buoni pasto, fringe benefit) se non arriva su un conto. Dalla scheda Budget puoi creare entrate ricorrenti, con mese di inizio e di fine, che ogni mese ti vengono proposte da confermare.")+
+    sec("Entrate","Ogni entrata è Ordinaria, Una tantum o Rimborso, e può essere “non incassata” (buoni pasto, fringe benefit) se non arriva su un conto. Gli importi li inserisci ogni mese.")+
     sec("Quadratura dei conti","Nella scheda Conti, dopo aver inserito i saldi (con la data di lettura), l’app confronta la variazione del patrimonio con entrate incassate e uscite di cassa e ti mostra lo scarto. Ogni conto può avere una quota tua (es. 50% per il conto cointestato) e delle riserve: soldi vincolati o non tuoi. Il fondo obiettivi è il patrimonio meno le riserve vincolate.")+
-    sec("Da fare e chiusura del mese","In cima alla scheda Mese trovi “Da fare”: ricorrenti da confermare, spese senza quota, addebito carta, backup e chiusura del mese. La chiusura ti guida in 4 passi: saldi con data, addebito carta, quadratura e giroconto di fine mese.")+
+    sec("Da fare e chiusura del mese","In cima alla scheda Mese trovi “Da fare”: spese senza quota, addebito carta, backup e chiusura del mese. La chiusura ti guida in 4 passi: saldi con data, addebito carta, quadratura e giroconto di fine mese.")+
     sec("Piano","Nella scheda Conti, la sezione Piano mostra il fondo obiettivi (patrimonio meno riserve vincolate), il giroconto da fare, la quadratura e il grafico del patrimonio nel tempo.")+
     sec("Spese frequenti e duplica","Quando registri una nuova spesa, in cima trovi le tue spese più frequenti: un tocco e il modulo è già compilato. Aprendo una spesa esistente, “Duplica” ne crea una nuova con gli stessi dati.")+
     sec("Se sbagli","Dopo ogni modifica compare in basso la barra Annulla per 10 secondi: toccala per tornare indietro.")+
@@ -1252,7 +1218,9 @@ async function shareBackup(){
   if(!canShareFiles()){toast("Condivisione non disponibile qui: usa “Salva backup sul telefono”");return;}
   try{await navigator.share({files:[file],title:"Backup EasyBilance"});toast("Backup inviato");
     if(S.cfg){const cf=clone(S.cfg);cf.ultimoBackup=todayISO();NOREC=true;saveCfg(cf);NOREC=false;}}
-  catch(e){if(e&&e.name!=="AbortError")toast("Condivisione non riuscita");}
+  catch(e){if(e&&e.name==="AbortError")return;
+    if(S.dl){try{await S.dl.save({filename:file.name,data:JSON.stringify(bk,null,1)});toast("Condivisione non riuscita ("+((e&&e.name)||"errore")+"): ho salvato il file sul telefono");return;}catch(e2){}}
+    toast("Condivisione non riuscita ("+((e&&e.name)||"errore")+"). Prova “Salva backup sul telefono”");}
 }
 function cleanBackup(raw){
   if(!raw||raw.app!=="bilancio-tascabile"||!raw.config||!Array.isArray(raw.config.categorie)||typeof raw.mesi!=="object")throw new Error("Il file non è un backup di EasyBilance.");
@@ -1261,7 +1229,6 @@ function cleanBackup(raw){
   const cfg={categorie:raw.config.categorie.filter(c=>c&&c.id).map(c=>{const o={id:str(c.id).replace(/[^a-z0-9-]/gi,"-"),nome:str(c.nome)||str(c.id),tipo:c.tipo==="E"?"E":"N",desc:str(c.desc)};if(typeof c.cond==="boolean")o.cond=c.cond;return o;}),
     budget:cleanB(raw.config.budget)};
   cfg.ricorrenti=(Array.isArray(raw.config.ricorrenti)?raw.config.ricorrenti:[]).filter(r=>r&&r.id).map(r=>({id:str(r.id),desc:str(r.desc),importo:num(r.importo),quota:r.quota?num(r.quota):null,cat:str(r.cat),giorno:Math.min(31,Math.max(1,Math.round(num(r.giorno))||1)),dal:/^\d{4}-\d{2}$/.test(r.dal)?r.dal:ymNow(),attiva:r.attiva!==false}));
-  cfg.ricorrentiE=(Array.isArray(raw.config.ricorrentiE)?raw.config.ricorrentiE:[]).filter(r=>r&&r.id).map(r=>{const o={id:str(r.id),desc:str(r.desc),importo:num(r.importo),tipo:r.tipo==="U"||r.tipo==="B"?r.tipo:"R",nc:!!r.nc,dal:/^\d{4}-\d{2}$/.test(r.dal)?r.dal:ymNow(),attiva:r.attiva!==false};if(/^\d{4}-\d{2}$/.test(r.al))o.al=r.al;return o;});
   if(raw.config.chiusura&&typeof raw.config.chiusura==="object")cfg.chiusura={orig:str(raw.config.chiusura.orig),dest:str(raw.config.chiusura.dest),soglia:num(raw.config.chiusura.soglia)};
   if(raw.config.ultimoBackup&&/^\d{4}-\d{2}-\d{2}$/.test(raw.config.ultimoBackup))cfg.ultimoBackup=raw.config.ultimoBackup;
   if(raw.config.budgetAnni&&typeof raw.config.budgetAnni==="object"){cfg.budgetAnni={};for(const [y,b] of Object.entries(raw.config.budgetAnni))if(/^\d{4}$/.test(y))cfg.budgetAnni[y]=cleanB(b);}
@@ -1271,7 +1238,7 @@ function cleanBackup(raw){
     mesi[ym]={spese:(m.spese||[]).filter(x=>x&&/^\d{4}-\d{2}-\d{2}$/.test(x.data)&&x.data.slice(0,7)===ym).map(x=>{const o={id:str(x.id)||uid(),data:x.data,importo:num(x.importo),desc:str(x.desc),cat:str(x.cat),ts:num(x.ts)};if(x.quota){o.quota=num(x.quota);o.totale=num(x.totale);}if(x.ric)o.ric=str(x.ric);if(x.k==="A"||x.k==="X")o.k=x.k;if(num(x.buoni)>0)o.buoni=num(x.buoni);if(x.carta)o.carta=true;return o;}),
       entrate:(m.entrate||[]).map(e=>{const o={id:str(e.id)||uid(),desc:str(e.desc),importo:num(e.importo)};if(e.tipo==="U"||e.tipo==="B")o.tipo=e.tipo;if(e.nc)o.nc=true;if(e.ric)o.ric=str(e.ric);return o;}),budgetExtra:m.budgetExtra==null?null:num(m.budgetExtra),saltate:(m.saltate||[]).map(str),addebitoCarta:m.addebitoCarta==null?null:num(m.addebitoCarta)};
   }
-  const rc=raw.conti||{};const conti={conti:(rc.conti||[]).filter(a=>a&&a.id).map(a=>{const o={id:str(a.id),nome:str(a.nome),tipo:str(a.tipo),saldoIniziale:num(a.saldoIniziale)};if(+a.quota>0&&+a.quota<1)o.quota=num(a.quota);if(Array.isArray(a.riserve))o.riserve=a.riserve.map(r=>({nome:str(r.nome),importo:num(r.importo),tipo:r.tipo==="A"?"A":"V",da:/^\d{4}-\d{2}$/.test(r.da)?r.da:""}));return o;}),saldi:{},saldiData:{}};
+  const rc=raw.conti||{};const conti={conti:(rc.conti||[]).filter(a=>a&&a.id).map(a=>{const o={id:str(a.id),nome:str(a.nome),tipo:str(a.tipo),saldoIniziale:num(a.saldoIniziale)};if(+a.quota>0&&+a.quota<1)o.quota=num(a.quota);if(Array.isArray(a.riserve))o.riserve=a.riserve.map(r=>({nome:str(r.nome),importo:num(r.importo),tipo:r.tipo==="A"?"A":r.tipo==="E"?"E":"V",da:/^\d{4}-\d{2}$/.test(r.da)?r.da:""}));return o;}),saldi:{},saldiData:{}};
   for(const [ym,d] of Object.entries(rc.saldiData||{}))if(/^\d{4}-\d{2}$/.test(ym)&&/^\d{4}-\d{2}-\d{2}$/.test(d))conti.saldiData[ym]=d;
   for(const [ym,o] of Object.entries(rc.saldi||{})){if(!/^\d{4}-\d{2}$/.test(ym)||!o)continue;conti.saldi[ym]={};for(const [k,v] of Object.entries(o))conti.saldi[ym][str(k)]=num(v);}
   return{config:cfg,mesi,conti};
@@ -1298,7 +1265,7 @@ async function applyImport(bk,mode){
   toast("Importazione in corso…");
   let cfg,mesi={},conti,ok=true,n=0;
   if(mode==="replace"||!S.cfg)cfg=clone(bk.config);
-  else{cfg=clone(S.cfg);bk.config.categorie.forEach(c=>{if(!cfg.categorie.some(x=>x.id===c.id))cfg.categorie.push(c)});cfg.ricorrenti=cfg.ricorrenti||[];(bk.config.ricorrenti||[]).forEach(r=>{if(!cfg.ricorrenti.some(x=>x.id===r.id))cfg.ricorrenti.push(r)});if(!cfg.chiusura&&bk.config.chiusura)cfg.chiusura=bk.config.chiusura;cfg.ricorrentiE=cfg.ricorrentiE||[];(bk.config.ricorrentiE||[]).forEach(r=>{if(!cfg.ricorrentiE.some(x=>x.id===r.id))cfg.ricorrentiE.push(r)});if(bk.config.budgetAnni){cfg.budgetAnni=cfg.budgetAnni||{};for(const [y,b] of Object.entries(bk.config.budgetAnni))if(!cfg.budgetAnni[y])cfg.budgetAnni[y]=b;}}
+  else{cfg=clone(S.cfg);bk.config.categorie.forEach(c=>{if(!cfg.categorie.some(x=>x.id===c.id))cfg.categorie.push(c)});cfg.ricorrenti=cfg.ricorrenti||[];(bk.config.ricorrenti||[]).forEach(r=>{if(!cfg.ricorrenti.some(x=>x.id===r.id))cfg.ricorrenti.push(r)});if(!cfg.chiusura&&bk.config.chiusura)cfg.chiusura=bk.config.chiusura;if(bk.config.budgetAnni){cfg.budgetAnni=cfg.budgetAnni||{};for(const [y,b] of Object.entries(bk.config.budgetAnni))if(!cfg.budgetAnni[y])cfg.budgetAnni[y]=b;}}
   if(mode==="replace"){mesi=clone(bk.mesi);conti=clone(bk.conti);Object.values(mesi).forEach(m=>n+=m.spese.length);}
   else{
     for(const [ym,m] of Object.entries(bk.mesi)){const cur=clone(md(ym));const ids=new Set(cur.spese.map(x=>x.id));
@@ -1362,10 +1329,6 @@ document.addEventListener("click",e=>{
   if(a==="backupShare")return shareBackup();
   if(a==="warnQ"){const q=nSenzaQuota(S.ym);S.view="spese";S.fcat=q.length?q[0].cat:null;S.q="";window.scrollTo(0,0);render();return;}
   if(a==="carta")return sheetCarta();
-  if(a==="ricEList")return sheetRicEList();
-  if(a==="ricEOk")return ricEConfirm([el.dataset.id]);
-  if(a==="ricEAll")return ricEConfirm(dueRicE(S.ym).map(r=>r.id));
-  if(a==="ricENo")return ricESkip(el.dataset.id);
   if(a==="budgetMese")return sheetBudgetMese();
   if(a==="editEntrate"){const y=curY();return sheetRows("Reddito netto "+y,"Le voci che compongono il reddito netto dell’anno.",B(y).entrate,"importo","€/anno",out=>saveBudget(y,{entrate:out.map(r=>({voce:r.voce,importo:r.n}))},"Reddito "+y+" aggiornato"));}
   if(a==="editFisse")return sheetFisse(curY());
