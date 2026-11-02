@@ -260,12 +260,12 @@ textarea.inp{resize:vertical;font-size:13px;font-family:ui-monospace,Menlo,Conso
 
 /* ===== Redesign 1.3: carta topografica ===== */
 body{font-family:var(--body);font-size:15px}
-.num,.big,.mid,.bigamt,.amount-inp,td,th,.pill{font-family:var(--mono);font-variant-numeric:tabular-nums}
-.big{font-size:42px;font-weight:700;letter-spacing:-.04em}
-.mid{font-size:20px;font-weight:600;letter-spacing:-.03em}
-.bigamt{font-size:34px;letter-spacing:-.04em}
+.num,.big,.mid,.bigamt,.amount-inp,td,th,.pill{font-family:var(--body);font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.big{font-size:42px;font-weight:700;letter-spacing:-.025em}
+.mid{font-size:21px;font-weight:700;letter-spacing:-.015em}
+.bigamt{font-size:34px;font-weight:700;letter-spacing:-.025em}
 .item .a,.kv b,.prev-row b,.cat-row b{font-weight:600}
-.pill{font-size:11.5px;font-weight:600;letter-spacing:-.01em}
+.pill{font-size:12px;font-weight:600}
 .app{padding-bottom:calc(118px + env(safe-area-inset-bottom,0px))}
 main{gap:12px}
 /* header */
@@ -297,7 +297,7 @@ main{gap:12px}
 .hero-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
 .hero-cell{display:flex;flex-direction:column;gap:2px;text-align:left;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);border-radius:12px;padding:10px 12px;color:var(--hero-ink);min-width:0}
 .hero-cell span{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--hero-muted)}
-.hero-cell b{font-size:18px;font-weight:600;letter-spacing:-.03em}
+.hero-cell b{font-size:19px;font-weight:700;letter-spacing:-.01em}
 .hero-cell small{font-size:12px;color:var(--hero-muted)}
 button.hero-cell:hover{background:rgba(255,255,255,.1)}
 /* liste: tacca colorata al posto dell'iniziale */
